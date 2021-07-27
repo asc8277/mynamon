@@ -12,7 +12,7 @@ npm ci
 
 run
 ```
-node index.js
+npm start
 ```
 
 ## Configuration
