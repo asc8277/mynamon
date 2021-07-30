@@ -9,11 +9,16 @@ if (process.argv[2] === '--version') {
   process.exit(0);
 }
 
-const base = process.env.MYNAMON_BASE || '192.168.1';
-const dns = process.env.MYNAMON_DNS || `${base}.1`;
-const timeout = process.env.MYNAMON_TIMEOUT || 15 * 60 * 1000;
-const port = process.env.MYNAMON_PORT || 8300;
-const root = process.env.MYNAMON_ROOT || '';
+const conf = {
+  base: process.env.MYNAMON_BASE || '192.168.1',
+  timeout: process.env.MYNAMON_TIMEOUT || 15 * 60 * 1000,
+  port: process.env.MYNAMON_PORT || 8300,
+  root: process.env.MYNAMON_ROOT || ''
+};
+conf.dns = process.env.MYNAMON_DNS || `${conf.base}.1`;
+console.log(conf);
+
+const { base, dns, timeout, port, root } = conf;
 
 const state = new State();
 const scanner = new Scanner({ base, dns });
