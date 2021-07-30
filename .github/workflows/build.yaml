@@ -10,9 +10,6 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
     steps:
       - name: delete old releases
         uses: dev-drprasad/delete-older-releases@v0.2.0
