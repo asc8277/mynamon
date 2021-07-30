@@ -12,8 +12,7 @@ if (process.argv[2] === '--version') {
 const conf = {
   base: process.env.MYNAMON_BASE || '192.168.1',
   timeout: process.env.MYNAMON_TIMEOUT || 15 * 60 * 1000,
-  port: process.env.MYNAMON_PORT || 8300,
-  root: process.env.MYNAMON_ROOT || ''
+  port: process.env.MYNAMON_PORT || 8300
 };
 conf.dns = process.env.MYNAMON_DNS || `${conf.base}.1`;
 console.log(conf);
