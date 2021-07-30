@@ -33,12 +33,6 @@ jobs:
           automatic_release_tag: latest
           prerelease: false
           title: latest
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}      
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -56,5 +50,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: asc8277/mynamon:latest
