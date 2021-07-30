@@ -2,6 +2,13 @@ import Io from './lib/io.js';
 import State from './lib/state.js';
 import Scanner from './lib/scanner.js';
 
+const version = process.env.MYNAMON_VERSION || 'dev';
+console.log(`mynamon build ${version}`);
+
+if (process.argv[2] === '--version') {
+  process.exit(0);
+}
+
 const base = process.env.MYNAMON_BASE || '192.168.1';
 const dns = process.env.MYNAMON_DNS || `${base}.1`;
 const timeout = process.env.MYNAMON_TIMEOUT || 15 * 60 * 1000;
