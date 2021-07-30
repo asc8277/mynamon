@@ -56,4 +56,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: asc8277/mynamon:latest
+          tags: ${{ steps.meta.outputs.tags }}
+
