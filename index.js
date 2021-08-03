@@ -1,6 +1,6 @@
-import Io from './lib/io.js';
+import ioServer from './lib/ioServer.js';
 import State from './lib/state.js';
-import Scanner from './lib/scanner.js';
+import scan from './lib/scan.js';
 
 const version = process.env.MYNAMON_VERSION || 'dev';
 console.log(`mynamon build ${version}`);
@@ -10,22 +10,20 @@ if (process.argv[2] === '--version') {
 }
 
 const conf = {
-  base: process.env.MYNAMON_BASE || '192.168.1',
+  subnet: process.env.MYNAMON_SUBNET || '192.168.0.0/24',
   timeout: process.env.MYNAMON_TIMEOUT || 15 * 60 * 1000,
   port: process.env.MYNAMON_PORT || 8300,
   root: process.env.MYNAMON_ROOT || ''
 };
-conf.dns = process.env.MYNAMON_DNS || `${conf.base}.1`;
 console.log(conf);
 
-const { base, dns, timeout, port, root } = conf;
+const { subnet, timeout, port, root } = conf;
 
 const state = new State();
-const scanner = new Scanner({ base, dns });
 const asyncTimeout = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
-const io = new Io({ port, root }).server;
+const io = ioServer(port, root);
 
 io.on('connection', (socket) => {
   const id = state.addSubscriber((state) => socket.emit('state', state));
@@ -35,7 +33,7 @@ io.on('connection', (socket) => {
 });
 
 const infiniteScanner = async () => {
-  const result = await scanner.scan();
+  const result = await scan(subnet);
   state.setState(result);
   await asyncTimeout(timeout);
   await infiniteScanner();
