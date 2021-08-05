@@ -21,7 +21,7 @@ npm start
 via environment:
 ```
 MYNAMON_SUBNET  the subnet to scan                                 default 192.168.0.0/24
-MYNAMON_TIMEOUT the timeout between scans                          default 15 minutes
+MYNAMON_TIMEOUT the timeout between scans in milliseconds          default 900000 (15 minutes)
 MYNAMON_PORT    the port to run the server                         default 8300
 MYNAMON_ROOT    the root path of the app (if behind reverse proxy) default "/mynamon"
 MYNAMON_LIMIT   the maximum number of history entries              default 1000
