@@ -3,26 +3,28 @@
 # mynamon
 Node.js server scanning and monitoring the devices in your local network, running on socket.io.
 
-## Usage
+## Usage (docker)
 
-install dependencies
+```
+docker pull ghcr.io/asc8277/mynamon:latest
+docker run -p 8300:8300 ghcr.io/asc8277/mynamon:latest
+```
+
+## Usage (node)
+
 ```
 npm ci
-```
-
-run
-```
 npm start
 ```
 
 ## Configuration
 via environment:
 ```
-MYNAMON_BASE    the first three octets of the IP range to scan, default "192.168.1"
-MYNAMON_DNS     the dns server to ask for hostnames, default "MYNAMON_BASE.1" (192.168.1.1)
-MYNAMON_TIMEOUT the timeout between scans, default 15 minutes
-MYNAMON_PORT    the port to run the server, default 8300
-MYNAMON_ROOT    the root url of the server, in case we're behind a reverse proxy, default ""
+MYNAMON_SUBNET  the subnet to scan                                 default 192.168.0.0/24
+MYNAMON_TIMEOUT the timeout between scans                          default 15 minutes
+MYNAMON_PORT    the port to run the server                         default 8300
+MYNAMON_ROOT    the root path of the app (if behind reverse proxy) default "/mynamon"
+MYNAMON_LIMIT   the maximum number of history entries              default 1000
 ```
 
 ## Development

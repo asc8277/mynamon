@@ -14,8 +14,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "lint": "eslint .",
-    "dev": "nodemon index.js"
+    "dev": "nodemon server.js"
   }
 }
