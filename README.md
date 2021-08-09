@@ -7,7 +7,7 @@ Node.js server scanning and monitoring the devices in your local network, runnin
 
 ```
 docker pull ghcr.io/asc8277/mynamon:latest
-docker run -p 8300:8300 ghcr.io/asc8277/mynamon:latest
+docker run -p 8300:8300 -v /path/to/local/persistence:/mynamon ghcr.io/asc8277/mynamon:latest
 ```
 
 ## Usage (node)
@@ -25,6 +25,7 @@ MYNAMON_TIMEOUT the timeout between scans in milliseconds          default 90000
 MYNAMON_PORT    the port to run the server                         default 8300
 MYNAMON_ROOT    the root path of the app (if behind reverse proxy) default "/mynamon"
 MYNAMON_LIMIT   the maximum number of history entries              default 1000
+MYNAMON_FILE    the persistence ("database") file                  default "mymanom.db"
 ```
 
 ## Development
