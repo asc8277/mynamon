@@ -12,7 +12,12 @@ window.startApp = (root) => {
   socket.on('disconnect', () => { view.style.border = 'red'; });
 
   socket.on('state', (state) => {
-    const allIps = Object.keys([...state].reverse().reduce((acc, cur) => ({ ...acc, ...cur.results }), {}));
+    const allIps = Object.keys(
+      state.reduce((acc, cur) => ({ ...acc, ...cur.results }), {})
+    ).sort((a, b) => {
+      const [n1, n2] = [a, b].map(i => Number(i.split('.').map((num) => (`000${num}`).slice(-3)).join('')));
+      return n1 - n2;
+    });
     const headerRow = allIps.reduce((acc, cur) => `${acc} ${alignString(cur)}`, alignString('', 25));
     const dataRows = state.map(s =>
       allIps.reduce((acc, cur) => `${acc} ${alignString(s.results[cur])}`, alignString(s.time, 25))
