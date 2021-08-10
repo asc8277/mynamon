@@ -28,7 +28,7 @@ const { subnet, timeout, port, root, limit, file } = conf;
   const state = new State({ limit, initialState });
   state.addSubscriber((s) => fs.writeFile(file, JSON.stringify(s, undefined, 2)));
 
-  const io = ioServer(port, root);
+  const io = ioServer(port, root, version);
   io.on('connection', (socket) => {
     const id = state.addSubscriber((s) => socket.emit('state', s));
     socket.on('disconnect', () => {
