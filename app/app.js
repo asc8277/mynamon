@@ -2,7 +2,7 @@ window.startApp = (root) => {
   const socket = io({ path: `${root}/socket.io` });
   const view = document.getElementById('view');
 
-  const alignString = (str = '', length = 20) => {
+  const alignString = (str = '', length = 15) => {
     return (str.length > length)
       ? `${str.substr(0, length - 1)}…`
       : str.padEnd(length);
@@ -12,15 +12,11 @@ window.startApp = (root) => {
   socket.on('disconnect', () => { view.style.border = 'red'; });
 
   socket.on('state', (state) => {
-    const allDevices = [...state].reverse().reduce((acc, cur) => ({ ...acc, ...cur.results }), {});
-    const values = Object.values(allDevices);
-    const headerRows = ['name', 'mac'].map(item =>
-      values.reduce((acc, cur) => `${acc} ${alignString(cur[item])}`, alignString('', 25))
-    );
-    const keys = Object.keys(allDevices);
+    const allIps = Object.keys([...state].reverse().reduce((acc, cur) => ({ ...acc, ...cur.results }), {}));
+    const headerRow = allIps.reduce((acc, cur) => `${acc} ${alignString(cur)}`, alignString('', 25));
     const dataRows = state.map(s =>
-      keys.reduce((acc, cur) => `${acc} ${alignString(s.results[cur]?.ip)}`, alignString(s.time, 25))
+      allIps.reduce((acc, cur) => `${acc} ${alignString(s.results[cur])}`, alignString(s.time, 25))
     );
-    view.innerHTML = [...headerRows, ...dataRows].join('\n');
+    view.innerHTML = [headerRow, ...dataRows].join('\n');
   });
 };
