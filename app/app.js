@@ -13,11 +13,13 @@ window.startApp = (root) => {
 
   socket.on('state', (state) => {
     const allDevices = [...state].reverse().reduce((acc, cur) => ({ ...acc, ...cur.results }), {});
+    const values = Object.values(allDevices);
     const headerRows = ['name', 'mac'].map(item =>
-      Object.values(allDevices).reduce((acc, cur) => `${acc} ${alignString(cur[item])}`, alignString('', 25))
+      values.reduce((acc, cur) => `${acc} ${alignString(cur[item])}`, alignString('', 25))
     );
+    const keys = Object.keys(allDevices);
     const dataRows = state.map(s =>
-      Object.keys(allDevices).reduce((acc, cur) => `${acc} ${alignString(s.results[cur]?.ip)}`, alignString(s.time, 25))
+      keys.reduce((acc, cur) => `${acc} ${alignString(s.results[cur]?.ip)}`, alignString(s.time, 25))
     );
     view.innerHTML = [...headerRows, ...dataRows].join('\n');
   });
