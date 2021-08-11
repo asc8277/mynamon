@@ -46,7 +46,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/mynamon:latest
+          tags: asc8277/mynamon:latest
       - name: create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
