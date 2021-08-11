@@ -27,7 +27,7 @@ window.startApp = (root) => {
     });
     const headerRow = allIps.reduce(
       (acc, cur) => `${acc} ${alignString(cur)}`,
-      alignString('', 25)
+      alignString('', 20)
     );
     const dataRows = state.map(s =>
       allIps.reduce(
