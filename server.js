@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import conf from './conf/conf.js';
 import ioServer from './lib/io.js';
 import State from './lib/state.js';
-import { asyncTimeout, scanIps } from './lib/utils.js';
+import Scanner from './lib/scanner.js';
 
 process.on('SIGINT', () => process.exit());
 
@@ -36,11 +36,5 @@ const { subnet, timeout, port, root, limit, file } = conf;
     });
   });
 
-  const infiniteScanner = async () => {
-    const result = await scanIps(subnet);
-    state.addIncrement(result);
-    await asyncTimeout(timeout);
-    await infiniteScanner();
-  };
-  infiniteScanner();
+  new Scanner(subnet, timeout, (result) => state.addIncrement(result)).infiniteScan();
 })();
