@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
 # mynamon
-Node.js server scanning and monitoring the devices in your local network, running on socket.io.
+Node.js SCS app/server scanning and monitoring the devices in your local network, running on socket.io.
 
 ## Usage (docker)
 
