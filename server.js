@@ -7,7 +7,7 @@ import Scanner from './lib/scanner.js';
 process.on('SIGINT', () => process.exit());
 
 const version = process.env.MYNAMON_VERSION || 'dev';
-console.log(`mynamon build ${version}`);
+console.log(`mynamon build ${version} on node ${process.version}`);
 
 if (process.argv[2] === '--version') {
   process.exit(0);
