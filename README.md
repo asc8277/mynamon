@@ -10,12 +10,16 @@ docker pull ghcr.io/asc8277/mynamon:latest
 docker run -p 8300:8300 -v /path/to/local/persistence:/mynamon ghcr.io/asc8277/mynamon:latest
 ```
 
+by default, the webapp is available at localhost:8300/mynamon
+
 ## Usage (node)
 
 ```
 npm ci
 npm start
 ```
+
+by default, the webapp is available at localhost:8300/mynamon
 
 ## Configuration
 via environment:
