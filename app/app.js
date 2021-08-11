@@ -8,6 +8,11 @@ window.startApp = (root) => {
       : str.padEnd(length);
   };
 
+  const dateOptions = ['year', 'month', 'day', 'hour', 'minute', 'second'].reduce(
+    (acc, cur) => ({ ...acc, [cur]: '2-digit' }),
+    { hourCycle: 'h24' }
+  );
+
   socket.on('connect', () => { view.style.borderColor = 'green'; });
   socket.on('disconnect', () => { view.style.border = 'red'; });
 
@@ -27,7 +32,7 @@ window.startApp = (root) => {
     const dataRows = state.map(s =>
       allIps.reduce(
         (acc, cur) => `${acc} ${alignString(s.results[cur])}`,
-        alignString(new Date(s.time).toLocaleString(), 25)
+        alignString(new Date(s.time).toLocaleString(undefined, dateOptions), 20)
       )
     );
     view.innerHTML = [headerRow, ...dataRows].join('\n');
