@@ -13,8 +13,8 @@ window.startApp = (root) => {
     { hourCycle: 'h24' }
   );
 
-  socket.on('connect', () => { view.style.borderColor = 'green'; });
-  socket.on('disconnect', () => { view.style.border = 'red'; });
+  socket.on('connect', () => { view.style.backgroundColor = '#aaffee'; });
+  socket.on('disconnect', () => { view.style.backgroundColor = '#ffdddd'; });
 
   socket.on('state', (state) => {
     const allIps = Object.keys(
